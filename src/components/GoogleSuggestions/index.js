@@ -3,7 +3,7 @@ import './index.css'
 
 import {Component} from 'react'
 
-import SuggestionItem from './SuggestionItem'
+import SuggestionItem from '../SuggestionItem'
 
 class App extends Component {
   state = {searchInput: ''}
@@ -16,7 +16,8 @@ class App extends Component {
 
   render() {
     const {searchInput} = this.state
-
+    const {GoogleSuggestions} = this.props
+    console.log(GoogleSuggestions)
     return (
       <div className="main-Contaianer">
         <div className="search-Container">
@@ -38,6 +39,16 @@ class App extends Component {
               alt="search icon"
               src="https://assets.ccbp.in/frontend/react-js/google-search-icon.png"
             />
+            <br />
+            <ul className="unorder-Items">
+              {this.props.GoogleSuggestions.map(eachSuggetion => (
+                <SuggestionItem
+                  key={eachSuggetion.id}
+                  onSuggetionClick={this.onSuggetionClick}
+                  suggestion={eachSuggetion.suggestion}
+                />
+              ))}
+            </ul>
           </div>
         </div>
       </div>
